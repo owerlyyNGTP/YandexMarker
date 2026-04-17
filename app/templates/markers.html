@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ title }}</h2>
+{% if markers %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Координаты</th>
+                    <th>Фото</th>
+                    <th>Добавлено</th>
+                    {% if show_delete %}<th>Действия</th>{% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for marker in markers %}
+                <tr>
+                    <td>{{ marker.title }}</td>
+                    <td>{{ marker.description or '' }}</td>
+                    <td>{{ marker.latitude|round(4) }}, {{ marker.longitude|round(4) }}</td>
+                    <td>
+                        {% if marker.image_filename %}
+                            <img src="{{ url_for('static', filename='uploads/' + marker.image_filename) }}" width="50">
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>{{ marker.created_at.strftime('%d.%m.%Y %H:%M') }}</td>
+                    {% if show_delete %}
+                    <td>
+                        <a href="{{ url_for('main.delete_marker', marker_id=marker.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Удалить метку?');">Удалить</a>
+                    </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <p>Нет меток.</p>
+{% endif %}
+{% endblock %}

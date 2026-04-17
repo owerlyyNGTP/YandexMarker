@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Админ-панель</h2>
+<h3>Пользователи ({{ users|length }})</h3>
+<table class="table table-bordered">
+    <thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Admin</th><th>Дата регистрации</th></tr></thead>
+    <tbody>
+    {% for u in users %}
+        <tr>
+            <td>{{ u.id }}</td>
+            <td>{{ u.username }}</td>
+            <td>{{ u.email }}</td>
+            <td>{{ 'Да' if u.is_admin else 'Нет' }}</td>
+            <td>{{ u.created_at.strftime('%d.%m.%Y %H:%M') }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<h3>Метки ({{ markers|length }})</h3>
+<table class="table table-bordered">
+    <thead><tr><th>ID</th><th>Название</th><th>Автор</th><th>Координаты</th><th>Публичная</th></tr></thead>
+    <tbody>
+    {% for m in markers %}
+        <tr>
+            <td>{{ m.id }}</td>
+            <td>{{ m.title }}</td>
+            <td>{{ m.author.username }}</td>
+            <td>{{ m.latitude }}, {{ m.longitude }}</td>
+            <td>{{ 'Да' if m.is_public else 'Нет' }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
