@@ -1,0 +1,36 @@
+# Виртуальное окружение
+.venv/
+venv/
+env/
+ENV/
+
+# Секретные ключи
+.env
+
+# База данных
+*.db
+*.sqlite
+*.sqlite3
+
+# Загруженные пользователями файлы
+app/static/uploads/*
+
+# Кэш Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Логи
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
